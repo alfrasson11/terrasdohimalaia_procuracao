@@ -174,11 +174,9 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            max-height: 90vh;
         }
 
         .form-scroll-body {
-            overflow-y: auto;
             padding: 1.5rem 2.5rem 2rem;
             flex: 1;
         }
@@ -629,22 +627,11 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group-row">
-                                    <div class="form-group">
-                                        <label for="p-data-cidade">Cidade de Assinatura</label>
-                                        <input type="text" id="p-data-cidade" value="Bocaina"
-                                            oninput="updateDocuments()">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="p-estado-assinatura">UF</label>
-                                        <input type="text" id="p-estado-assinatura" value="SP" maxlength="2"
-                                            oninput="updateDocuments()">
-                                    </div>
-                                </div>
-
                                 <div class="form-group">
                                     <label for="p-data">Data do Documento</label>
                                     <input type="date" id="p-data" oninput="updateDocuments()">
+                                    <p class="form-help">A cidade e o estado de assinatura são fixos em "Jaú/SP",
+                                        conforme o modelo.</p>
                                 </div>
 
                                 <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;"
@@ -784,8 +771,6 @@
             const cidade       = val('p-cidade',      'Bocaina');
             const estado       = val('p-estado',      'SP');
             const cep          = val('p-cep',         '____________________');
-            const dataCidade   = val('p-data-cidade', 'Bocaina');
-            const estadoAssinatura = val('p-estado-assinatura', 'SP');
             const dateFormatted = formatDateLong(document.getElementById('p-data').value);
 
             documentSheet.innerHTML = `
@@ -840,7 +825,7 @@
                 </div>
 
                 <div class="doc-signatures">
-                    <div style="margin-top: 20px; font-family:'Times New Roman',serif;">${dataCidade}/${estadoAssinatura}, ${dateFormatted}.</div>
+                    <div style="margin-top: 20px; font-family:'Times New Roman',serif;">Jaú/SP, ${dateFormatted}.</div>
                     <div class="doc-signature-space">
                         <span class="screen-only">(espaço reservado para assinatura digital)</span>
                     </div>
