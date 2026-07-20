@@ -571,15 +571,21 @@
 
                                 <div class="form-group-row">
                                     <div class="form-group">
-                                        <label for="p-rg">RG (SSP/SP)</label>
-                                        <input type="text" id="p-rg" placeholder="Ex: 00.000.000-0"
+                                        <label for="p-rg">RG</label>
+                                        <input type="text" id="p-rg" placeholder="Ex: 12.345.678-9"
                                             oninput="updateDocuments()">
                                     </div>
                                     <div class="form-group">
-                                        <label for="p-cpf">CPF</label>
-                                        <input type="text" id="p-cpf" placeholder="Ex: 000.000.000-00"
+                                        <label for="p-rg-orgao">Órgão Expedidor</label>
+                                        <input type="text" id="p-rg-orgao" value="SSP/SP" placeholder="Ex: SSP/SP"
                                             oninput="updateDocuments()">
                                     </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="p-cpf">CPF</label>
+                                    <input type="text" id="p-cpf" placeholder="Ex: 000.000.000-00"
+                                        oninput="updateDocuments()">
                                 </div>
 
                                 <div class="form-group-row">
@@ -710,19 +716,6 @@
                 });
             }
 
-            // RG mask: 00.000.000-0 (dígito verificador pode ser X)
-            const rg = document.getElementById('p-rg');
-            if (rg) {
-                rg.addEventListener('input', e => {
-                    let v = e.target.value.toUpperCase().replace(/[^0-9X]/g, '').slice(0, 9);
-                    if (v.length > 8)      v = `${v.slice(0,2)}.${v.slice(2,5)}.${v.slice(5,8)}-${v.slice(8)}`;
-                    else if (v.length > 5) v = `${v.slice(0,2)}.${v.slice(2,5)}.${v.slice(5)}`;
-                    else if (v.length > 2) v = `${v.slice(0,2)}.${v.slice(2)}`;
-                    e.target.value = v;
-                    updateDocuments();
-                });
-            }
-
             // CEP mask: 00000-000
             const cep = document.getElementById('p-cep');
             if (cep) {
@@ -762,6 +755,7 @@
             const estadoCivil  = val('p-estado-civil','Casado');
             const profissao    = val('p-profissao',   '____________________');
             const rg           = val('p-rg',          '____________________');
+            const rgOrgao      = val('p-rg-orgao',    'SSP/SP');
             const cpf          = val('p-cpf',         '____________________');
             const rua          = val('p-rua',         '____________________________________');
             const num          = val('p-num',         '____');
@@ -802,7 +796,7 @@
 
                 <div class="doc-body" style="font-family:'Times New Roman',serif; font-size:11pt; line-height:1.7;">
                     <p class="doc-paragraph">
-                        <strong>OUTORGANTE</strong> – Nome: <strong>${nome}</strong>, ${nacionalidade}, estado civil: ${estadoCivil}, profissão: ${profissao}, ${portador} da cédula de identidade RG nº ${rg} SSP/SP, ${inscrito} no CPF nº ${cpf}, ${domiciliado} na Rua/Avenida/Alameda: ${rua}, nº ${num}${comp}, bairro: ${bairro}, na cidade de ${cidade}/${estado} – CEP: ${cep}.
+                        <strong>OUTORGANTE</strong> – Nome: <strong>${nome}</strong>, ${nacionalidade}, estado civil: ${estadoCivil}, profissão: ${profissao}, ${portador} da cédula de identidade RG nº ${rg} ${rgOrgao}, ${inscrito} no CPF nº ${cpf}, ${domiciliado} na Rua/Avenida/Alameda: ${rua}, nº ${num}${comp}, bairro: ${bairro}, na cidade de ${cidade}/${estado} – CEP: ${cep}.
                     </p>
                     <p class="doc-paragraph">
                         <strong>OUTORGADO</strong> –
